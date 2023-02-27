@@ -40,7 +40,7 @@ public class ScoreManager : MonoBehaviour
     {
         gameOverSet.SetActive(true);
         bestScore = JudgmentBestScore(score + elapsedTime);
-        gameOverScoreText.text = "Score:" + bestScore.ToString("F0");
+        gameOverScoreText.text = "BestScore:" + bestScore.ToString("F0");
         isPlay = false;
         Time.timeScale = 0;
     }

@@ -6,10 +6,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private  bool isGravityChange;
+    private bool isMoveCamera=false;
+    [SerializeField] private Transform mainCamera;
+    [SerializeField] private Transform playCameraPosition;
+    [SerializeField] private GameObject startSet;
+
+
+    private float speed = 2;
    
-    void Awake()
+    void Start()
     {
         isGravityChange = false;
+        Time.timeScale = 0;
     }
     void Update()
     {
@@ -21,6 +29,22 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
             SceneManager.LoadScene("Main");
         }
+
+        if (Input.GetKey(KeyCode.A)) 
+        {
+            isMoveCamera = true;
+            Time.timeScale = 1;
+            startSet.SetActive(false);
+        }
             
+
+        if (isMoveCamera)
+        {
+            mainCamera.position = Vector3.MoveTowards(mainCamera.position, playCameraPosition.position, speed * Time.deltaTime);
+            mainCamera.eulerAngles = playCameraPosition.localEulerAngles;
+        }
+
+
+
     }
 }
